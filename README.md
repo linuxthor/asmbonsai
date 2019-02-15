@@ -1,6 +1,6 @@
 # asmbonsai
 
-Ultra small 64 bit Linux assembly hello world 
+Small x86-64 bit Linux assembly hello world 
 
 All code is in unused/ignored header sections
 
