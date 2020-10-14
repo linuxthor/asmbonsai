@@ -16,5 +16,5 @@ Run:
 $ chmod +x asmbonsai
 $ ./asmbonsai 
 HELLO
-8$ 
+$ 
 ```
