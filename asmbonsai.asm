@@ -37,9 +37,9 @@ two:
     mov esi, message      ; 5
     pop rdx               ; 1
     jmp _end              ; 2 
-    dq  0x080808          ; p_filesz          <------
-    dq  0x080808          ; p_memsz              <---
-    dq  0x080808          ; p_align / ascii backspace 
+    dq  0x080808          ; p_filesz          <------.
+    dq  0x080808          ; p_memsz              <---.|
+    dq  0x080808          ; p_align / ascii backspace.|
 
 phdrsize equ $-phdr
 filesize equ $-$$
