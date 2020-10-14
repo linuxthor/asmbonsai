@@ -23,7 +23,6 @@ one:
 
 message:
     db "HELLO",0x0a
-    length equ $-message
     dw phdrsize           ; e_phentsize:      program header size 
 
 phdr:
