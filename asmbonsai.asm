@@ -42,4 +42,3 @@ two:
     dq  0x080808          ; p_align / ascii backspace.|
 
 phdrsize equ $-phdr
-filesize equ $-$$
