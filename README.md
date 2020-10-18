@@ -15,6 +15,6 @@ Run:
 ```
 $ chmod +x asmbonsai
 $ ./asmbonsai 
-HELLO
+HELLO WORLD!!
 $ 
 ```
