@@ -18,7 +18,7 @@ one:
     dq phdr-$$              ; 8   e_phoff	     program header offset 
 
 message:
-    db "HELLO WORLD!!",0x0a
+    db "Hello, World!",0x0a
     dw phdrsize             ; 2   e_phentsize:      program header size     
 
 phdr:
