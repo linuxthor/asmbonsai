@@ -5,10 +5,10 @@ ehdr:
     db 0x7f, "ELF"                  ; 4      e_ident / jg _start 
 
 more:
-    xchg rsi, rcx                   ; 3
-    mov dl, 60                      ; 2
+    xchg rsi, rcx                   ; 3      rsi is 'near enough' the buffer now
+    pop rax                         ; 1      only works if argc is 1 :(  
+    mov dl, 60                      ; 2      
     jmp _end                        ; 2
-    nop                             ; 1
 
     dd 0x01                         ; 4
     dw 3                            ; 2      e_type:    dynamic
@@ -18,7 +18,7 @@ more:
     dq 0x0c                         ; 8
 
 go:
-    syscall                         ; 2      read(0, NULL, 0) to get return address in rcx     
+    syscall                         ; 2      read(0, NULL, 0) to get address in rcx     
     jmp more                        ; 2
     db 0xf4                         ; 1  
     db 0xff                         ; 1
@@ -35,6 +35,5 @@ _start:
     jmp go                          ; 2
 
 _end: 
-    inc al                          ; 2
     syscall                         ; 2
     syscall                         ; 2
