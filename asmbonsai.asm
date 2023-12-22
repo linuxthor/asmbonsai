@@ -4,11 +4,11 @@ org 0x010000
 ehdr:
     db 0x7f, "ELF"                  ; 4      e_ident / jg _start 
 
-fin:
-    mov dl, 25                      ; 2
-    syscall                         ; 2
-    add al, 35                      ; 2
-    syscall                         ; 2
+more:
+    xchg rsi, rcx                   ; 3
+    mov dl, 60                      ; 2
+    jmp _end                        ; 2
+    nop                             ; 1
 
     dd 0x01                         ; 4
     dw 3                            ; 2      e_type:    dynamic
@@ -18,8 +18,8 @@ fin:
     dq 0x0c                         ; 8
 
 go:
-    inc al                          ; 2
-    jmp fin                         ; 2
+    syscall                         ; 2      read(0, NULL, 0) to get return address in rcx     
+    jmp more                        ; 2
     db 0xf4                         ; 1  
     db 0xff                         ; 1
 
@@ -29,8 +29,12 @@ message:
     db "ll"                         ; 2 
     dw 0x38                         ; 2
     dd 0x01                         ; 4
-    db 0x08,"o, world!",0x0a        ; 11      
-
+    db 0x08,"o, world!",0x0a        ; 11     
+ 
 _start:
-    lea rsi, [rel message]          ; 7
     jmp go                          ; 2
+
+_end: 
+    inc al                          ; 2
+    syscall                         ; 2
+    syscall                         ; 2
