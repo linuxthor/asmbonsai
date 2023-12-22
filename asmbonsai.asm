@@ -1,45 +1,36 @@
 BITS 64
-org  0x010000
+org 0x010000
 
 ehdr:
-    db 0x7F, "ELF"          ; 4 
+    db 0x7f, "ELF"                  ; 4      e_ident / jg _start 
 
-_start:
-    mov esi, message        ; 5
-    inc al                  ; 2
-    push 60                 ; 2
-    jmp next                ; 2
-    nop                     ; 1
-    dw 2                    ; 2   e_type:         executable
-    dw 0x3e                 ; 2   e_machine:      amd64
-next:
-    pop dx                  ; 2
-    jmp next2               ; 2
-    dq _start               ; 8   e_entry
-    dq phdr-$$              ; 8   e_phoff            program header offset 
+fin:
+    mov dl, 25                      ; 2
+    syscall                         ; 2
+    add al, 35                      ; 2
+    syscall                         ; 2
+
+    dd 0x01                         ; 4
+    dw 3                            ; 2      e_type:    dynamic
+    dw 0x3e                         ; 2      e_machine: amd64
+    dq 0x0c                         ; 8
+    dd 0x0c                         ; 4
+    dq 0x0c                         ; 8
+
+go:
+    inc al                          ; 2
+    jmp fin                         ; 2
+    db 0xf4                         ; 1  
+    db 0xff                         ; 1
 
 message:
-    db "Hello, World!",0x0a ; 14
-    dw phdrsize             ; 2   e_phentsize:      program header size     
+    db "He"                         ; 1
+    dd 0x00                         ; 4
+    db "ll"                         ; 2 
+    dw 0x38                         ; 2
+    dd 0x01                         ; 4
+    db 0x08,"o, world!",0x0a        ; 11      
 
-phdr:
-    dw 1                    ; 2    e_phnum:          one program header / p_type
-    db 0                    ; 1    <-------          padded for p_type 
-    db 0                    ; 1    <--'
-    dd 1                    ; 4    p_flags           execute 
-    dq 0                    ; 8    p_offset
-    dq $$                   ; 8    p_vaddr:          start of current section
-
-next2:
-    syscall                 ; 2 
-    syscall                 ; 2
-    nop                     ; 1
-    nop                     ; 1
-    nop                     ; 1
-    nop                     ; 1 
-
-    dq  0x08080808          ; 8    p_filesz
-    dq  0x08080808          ; 8    p_memsz
-    dq  0x08080808          ; 8    p_align / ascii backspace 
-
-phdrsize equ $-phdr
+_start:
+    lea rsi, [rel message]          ; 7
+    jmp go                          ; 2
