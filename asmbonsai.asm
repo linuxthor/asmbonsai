@@ -24,7 +24,7 @@ go:
     db 0xff                         ; 1
 
 message:
-    db "He"                         ; 1
+    db "He"                         ; 2
     dd 0x00                         ; 4
     db "ll"                         ; 2 
     dw 0x38                         ; 2
