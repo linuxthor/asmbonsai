@@ -2,9 +2,7 @@
 
 Small x86-64 bit Linux assembly hello world 
 
-All code and data is in unused/ignored header sections
-
-Compiles to a 112 byte Linux ELF binary 
+Compiles to a 80 byte Linux ELF binary 
 
 Assemble with: 
 
@@ -15,6 +13,6 @@ Run:
 ```
 $ chmod +x asmbonsai
 $ ./asmbonsai 
-Hello, World!
+Hello, world!
 $ 
 ```
