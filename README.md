@@ -16,3 +16,5 @@ $ ./asmbonsai
 Hello, world!
 $ 
 ```
+
+(BUG: Unfortunately latest versions will print a few extra characters if not run under tmux)  
