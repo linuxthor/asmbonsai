@@ -5,10 +5,10 @@ ehdr:
     db 0x7f, "ELF"                  ; 4      e_ident / jg _start 
 
 more:
-    xchg rsi, rcx                   ; 3
-    pop  rax                        ; 1
-    mov  dl, 60                     ; 2
-    jmp  _start                     ; 2
+    mov rsi, rcx                    ; 3
+    pop rax                         ; 1
+    mov dl, 60                      ; 2
+    jmp _start                      ; 2
 
     dd 0x01                         ; 4
     dw 3                            ; 2      e_type:    dynamic
