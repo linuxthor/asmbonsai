@@ -2,7 +2,7 @@
 
 Small x86-64 bit Linux assembly hello world 
 
-Compiles to a 75 byte Linux ELF binary 
+Compiles to a 73 byte Linux ELF binary 
 
 Assemble with: 
 
